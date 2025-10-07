@@ -23,12 +23,9 @@ pipeline {
     stage('Deploy') {
       steps {
         // Use an SSH credential stored in Jenkins (Manage Jenkins > Credentials)
-        sshagent(credentials: ['server-ssh']) {
-          // Disable host key prompt the first time; or pre-add the host key
-          sh '''
+         sh '''
             docker cp /var/jenkins_home/workspace/trainosys-clone/target/trainosys.war f74fb08808dc:/usr/local/tomcat/webapps/trainosys.war  
           '''
-        }
       }
     }
   }
