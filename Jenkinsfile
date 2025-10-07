@@ -1,6 +1,9 @@
 pipeline {
   agent any
 
+  tools {
+     maven 'maven.3.9.11'  
+  }
   stages {
     stage('Checkout') {
       steps {
@@ -23,9 +26,7 @@ pipeline {
         sshagent(credentials: ['server-ssh']) {
           // Disable host key prompt the first time; or pre-add the host key
           sh '''
-            WAR_FILE=$(ls target/*.war | head -n 1)
-            echo "Deploying $WAR_FILE"
-            scp -o StrictHostKeyChecking=no "$WAR_FILE" root@52.23.231.36:/root/tomcat/apache-tomcat-10.1.46/webapps/
+            docker cp /var/jenkins_home/workspace/trainosys-clone/target/trainosys.war f74fb08808dc:/usr/local/tomcat/webapps/trainosys.war  
           '''
         }
       }
