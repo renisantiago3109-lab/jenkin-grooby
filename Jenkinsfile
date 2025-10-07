@@ -6,11 +6,6 @@ pipeline {
     ansiColor('xterm')
   }
 
-  environment {
-    // If you use a configured Maven installation in Jenkins:
-    // MAVEN_HOME = tool name: 'M3', type: 'maven'
-  }
-
   stages {
     stage('Checkout') {
       steps {
