@@ -4,7 +4,7 @@ pipeline {
     stages {
         stage('Clone-Repo') {
 	    	steps {
-                cd /root/.jenkins/workspace/trainosys-script
+                cd "/root/.jenkins/workspace/trainosys-script"
 	        	git clone https://github.com/prasad-srtech/trainosys.git
 	    	}
         }
