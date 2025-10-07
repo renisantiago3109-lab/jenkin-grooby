@@ -4,7 +4,8 @@ pipeline {
     stages {
         stage('Clone-Repo') {
 	    	steps {
-	        	checkout scm
+                cd /root/.jenkins/workspace/trainosys-script
+	        	git clone https://github.com/prasad-srtech/trainosys.git
 	    	}
         }
 	stage('Build') {
