@@ -4,8 +4,8 @@ pipeline {
     stages {
     stage('Clone-Repo') {
      	steps {
-            git branch : 'main' ,
-                             url: 'https://github.com/prasad-srtech/trainosys.git'
+                git branch : 'main' ,
+                url: 'https://github.com/prasad-srtech/trainosys.git'
 	    	}
         }
 	stage('Build') {
