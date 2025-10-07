@@ -2,38 +2,24 @@ pipeline {
     agent any
 
     stages {
-        stage('Clone-Repo') {
-	    	steps {
-                cd "/root/.jenkins/workspace/trainosys-script"
-	        	git clone https://github.com/prasad-srtech/trainosys.git
+    stage('Clone-Repo') {
+     	steps {
+            git branch : 'main' ,
+                             url: 'https://github.com/prasad-srtech/trainosys.git'
 	    	}
         }
 	stage('Build') {
 		steps {
-			sh 'mvn install'
+            dir('/root/.jenkins/workspace/trainosys-script') {
+                sh 'mvn install'
+            }
+			
 		}
 	}	
  
-	stage ('Compile'){
-	        steps {
-			sh 'mvn clean compile'
-                }
-	}
-
-	stage('Run Tests') {
-	    steps {
-	       sh 'mvn test'
-	    }
-	}
-
-        stage('Package as WAR') {
-            steps {
-                sh 'mvn package'
-            }
-        }
 	stage('Deployment') {
 	   steps {
-		sh 'scp target/gamutkart.war root@172.31.27.53:/root/tomcat/apache-tomcat-10.1.36/webapps'
+		sh 'scp /root/.jenkins/workspace/trainosys-script/target/trainosys.war root@52.23.231.36:/root/tomcat/apache-tomcat-10.1.46/webapps'
 	}
     }
 }
